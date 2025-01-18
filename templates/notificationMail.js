@@ -1,90 +1,79 @@
-const notificationMail = (notificationTitle,notificationBody,companyName,recipientName) =>{
+const notificationMail = (projectName,exceptionName,exceptionCause,exceptionStack,llmResponse) =>{
     return (
         `
     <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exception Alert</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
             margin: 0;
             padding: 0;
         }
-        .email-container {
+        .container {
             max-width: 600px;
             margin: 20px auto;
             background-color: #ffffff;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
         .header {
-            background-color: #4CAF50;
+            background-color: #d42121;
             padding: 20px;
             color: #ffffff;
             text-align: center;
+        }
+        .header h1 {
+            margin: 0;
             font-size: 24px;
         }
-        .header span {
-            font-weight: bold;
-        }
         .content {
-            padding: 30px;
+            padding: 20px;
             color: #333333;
-            line-height: 1.6;
         }
         .content h2 {
-            color: #4CAF50;
-            font-size: 22px;
-            margin-bottom: 20px;
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #000000;
         }
         .content p {
-            margin-bottom: 10px;
-        }
-        .cta-button {
-            display: inline-block;
-            background-color: #4CAF50;
-            color: #ffffff;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-weight: bold;
+            margin: 5px 0;
         }
         .footer {
-            background-color: #f4f4f4;
-            padding: 20px;
+            background-color: #f1f1f1;
+            padding: 10px;
             text-align: center;
-            font-size: 14px;
-            color: #666666;
+            font-size: 12px;
+            color: #777777;
         }
         .footer a {
-            color: #4CAF50;
+            color: #4caf50;
             text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <div class="email-container">
-        <!-- Header Section -->
-        <div class="header">
-            <span>${companyName}</span> - Notification
-        </div>
 
-        <!-- Main Content -->
-        <div class="content">
-            <h2>${notificationTitle}</h2>
-            <p>Dear ${recipientName},</p>
-            <p>We wanted to inform you about the following update:</p>
-            <p><strong>${notificationBody}</strong></p>
-            
-        </div>
-
-        <!-- Footer Section -->
-        <div class="footer">
-            &copy; 2024 ${companyName}. All Rights Reserved. 
-            <br>
-        </div>
+<div class="container">
+    <div class="header">
+        <h1>Exception Alert</h1>
     </div>
+    <div class="content">
+        
+        <p><strong>Project Name:</strong> <span id="projectName">${projectName}</span></p>
+        <p><strong>Exception Name:</strong> <span id="exceptionName">${exceptionName}</span></p>
+        <p><strong>Cause:</strong> <span id="exceptionCause">${exceptionCause}</span></p>
+        <p><strong>Stack Trace:</strong></p>
+        <pre id="exceptionStack">${exceptionStack}</pre>
+        <p><strong>Probable Solution:</strong> <span id="probableSolution">${llmResponse}</span></p>
+    </div>
+    <div class="footer">
+        <p>For more information, visit <a href="https://www.example.com/help" target="_blank">our help page</a>.</p>
+    </div>
+</div>
 </body>
         `
     )

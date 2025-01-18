@@ -1,4 +1,6 @@
 const getQueueChannel = require('../config/queue')
+const sendMail = require("./sendEmail")
+
 const processedExchange = 'processedExchange'
 const rawExchange = 'rawExchange'
 
@@ -48,7 +50,10 @@ async function consumeFromEmailQueue() {
             if(message.content){
 
                 const data = JSON.parse(message.content)
-                console.log(data)
+                const send = await sendMail(data)
+                if(send === 200){
+                    channel.ack(message)
+                }
 
             }
         },{noAck:false})
