@@ -3,14 +3,12 @@ const app = express();
 const dotenv = require('dotenv')
 dotenv.config()
 const PORT = process.env.PORT
-const getQueueChanel = require("./config/queue")
 const {initExchanges,consumeFromEmailQueue} = require("./utils/rabbitManager")
 app.use(express.json());
 
 
-getQueueChanel().then(
+initExchanges().then(
     async ()=>{
-        await initExchanges()
         await consumeFromEmailQueue()
     }
 )
